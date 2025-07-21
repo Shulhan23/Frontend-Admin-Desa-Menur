@@ -1,49 +1,45 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
-export default function Sidebar() {
+export default function Sidebar({ open, toggleSidebar }) {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
 
   const menu = [
     { label: 'Dashboard', href: '/' },
     { label: 'Tambah Berita', href: '/tambah-berita' },
   ]
 
-  const toggleSidebar = () => setOpen(!open)
-
   return (
     <>
-      {/* Tombol Toggle untuk Mobile */}
-      <div className="md:hidden p-4 flex justify-between items-center bg-green-50 border-b">
-        <h2 className="text-lg font-semibold text-green-800">Panel Admin</h2>
-        <button onClick={toggleSidebar} className="text-green-800">
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+      {/* Overlay saat sidebar terbuka (mobile) */}
+      {open && <div onClick={toggleSidebar} className="fixed inset-0 bg-black opacity-30 z-40 md:hidden"></div>}
 
       {/* Sidebar */}
       <aside
-        className={`${
-          open ? 'block' : 'hidden'
-        } md:block fixed md:static top-0 left-0 h-full w-64 bg-white border-r shadow-md z-50 p-6`}
+        className={`
+          fixed top-0 left-0 h-full w-64 bg-white border-r shadow-md z-50 p-6
+          transform ${open ? 'translate-x-0' : '-translate-x-full'} 
+          transition-transform duration-300
+          md:static md:translate-x-0 md:block
+        `}
       >
-        <div className="md:hidden flex justify-end mb-4">
+        <div className="flex justify-between items-center md:hidden mb-4">
+          <h2 className="text-lg font-semibold text-green-800">Panel Admin</h2>
           <button onClick={toggleSidebar} className="text-green-800">
             <X size={24} />
           </button>
         </div>
-        <h2 className="text-lg font-bold text-green-800 mb-6 hidden md:block">Panel Admin</h2>
+
+        <h2 className="hidden md:block text-lg font-bold text-green-800 mb-6">Panel Admin</h2>
         <nav className="space-y-2">
           {menu.map(({ label, href }) => (
             <Link
               key={href}
               href={href}
-              onClick={() => setOpen(false)} // tutup sidebar setelah klik
+              onClick={toggleSidebar}
               className={`block px-4 py-2 rounded text-sm font-medium ${
                 pathname === href
                   ? 'bg-green-600 text-white'
@@ -55,9 +51,6 @@ export default function Sidebar() {
           ))}
         </nav>
       </aside>
-
-      {/* Overlay ketika sidebar terbuka di mobile */}
-      {open && <div onClick={toggleSidebar} className="fixed inset-0 bg-black opacity-30 z-40 md:hidden"></div>}
     </>
   )
 }
