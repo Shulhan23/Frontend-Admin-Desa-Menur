@@ -12,22 +12,25 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside className="w-full md:w-64 bg-green-50 border-b md:border-b-0 md:border-r p-4">
-      <h2 className="text-base font-semibold text-green-800 mb-4">Panel Admin</h2>
-      <nav className="flex flex-col space-y-2">
-        {menu.map(({ label, href }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`px-2 py-1 rounded text-sm font-medium ${
-              pathname === href
-                ? 'bg-green-600 text-white'
-                : 'text-green-800 hover:bg-green-100'
-            } transition`}
-          >
-            {label}
-          </Link>
-        ))}
+    <aside className="w-full md:w-64 bg-white border-r shadow-sm p-6">
+      <h2 className="text-xl font-bold text-green-700 mb-6">Admin Panel</h2>
+      <nav className="space-y-2">
+        {menu.map(({ label, href }) => {
+          const isActive = pathname === href
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive
+                  ? 'bg-green-600 text-white'
+                  : 'text-green-800 hover:bg-green-100'
+              }`}
+            >
+              {label}
+            </Link>
+          )
+        })}
       </nav>
     </aside>
   )
