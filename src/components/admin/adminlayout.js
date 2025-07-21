@@ -34,15 +34,14 @@ export default function AdminLayout({ children }) {
     }
   }
 
-  const toggleSidebar = () => setSidebarOpen(prev => !prev)
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <>
+      <Header onLogout={handleLogout} toggleSidebar={toggleSidebar} />
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex flex-col flex-1">
-        <Header onLogout={handleLogout} toggleSidebar={toggleSidebar} />
-        <main className="p-4">{children}</main>
-      </div>
-    </div>
+      {sidebarOpen && <div onClick={toggleSidebar} className="fixed inset-0 bg-black opacity-30 z-40"></div>}
+      <main className="p-4 bg-gray-100 min-h-screen">{children}</main>
+    </>
   )
 }
