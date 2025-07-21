@@ -1,4 +1,4 @@
-// app/(admin)/admin/layout.js
+// app/layout.js
 'use client'
 
 import { usePathname } from 'next/navigation'
