@@ -1,12 +1,13 @@
-// src/components/admin/adminlayout.js
 'use client'
 
+import { useState } from 'react'
 import Sidebar from './sidebar'
 import Header from './header'
 import { useRouter } from 'next/navigation'
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleLogout = async () => {
     await fetch('/laravel-api/sanctum/csrf-cookie', {
@@ -33,11 +34,13 @@ export default function AdminLayout({ children }) {
     }
   }
 
+  const toggleSidebar = () => setSidebarOpen(prev => !prev)
+
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex flex-col flex-1">
-        <Header onLogout={handleLogout} />
+        <Header onLogout={handleLogout} toggleSidebar={toggleSidebar} />
         <main className="p-4">{children}</main>
       </div>
     </div>
