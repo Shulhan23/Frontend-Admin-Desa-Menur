@@ -74,7 +74,7 @@ export default function TambahBeritaPage() {
       })
 
       if (res.ok) {
-        router.push('/admin/dashboard')
+        router.push('/')
       } else {
         const error = await res.json()
         alert(error.message || 'Gagal menambah berita.')
