@@ -8,7 +8,7 @@ export default function Sidebar() {
   const pathname = usePathname()
 
   const menu = [
-    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Dashboard', href: '/' },
     { label: 'Tambah Berita', href: '/tambah-berita' },
   ]
 
