@@ -71,20 +71,6 @@ export default function AdminDashboard() {
     }
   }
 
-  const handleDeleteKonten = (index) => {
-    const kontenToDelete = tempKonten[index]
-
-    // Jika konten punya ID (sudah tersimpan di database), simpan ID-nya untuk dihapus
-    if (kontenToDelete.id) {
-      setHapusKontenId((prev) => [...prev, kontenToDelete.id])
-    }
-
-    // Hapus dari UI (tempKonten)
-    const updatedKonten = [...tempKonten]
-    updatedKonten.splice(index, 1)
-    setTempKonten(updatedKonten)
-  }
-
   const handleEditSubmit = async (e) => {
     e.preventDefault()
     if (!modalData || !modalData.id) return
@@ -145,7 +131,7 @@ export default function AdminDashboard() {
 
         const updatedRes = await fetch(`/laravel-api/api/v1/berita-by-id/${modalData.id}`, {
           credentials: 'include',
-          headers: {
+          headers: {  
             Accept: 'application/json',
           },
         })
@@ -219,7 +205,7 @@ export default function AdminDashboard() {
                       ) : (
                       <img
                         key={i}
-                        src={`http://localhost:8000/storage/${k.konten}?t=${Date.now()}`}
+                        src={`${process.env.NEXT_PUBLIC_LARAVEL_URL}/${k.konten}?t=${Date.now()}`}
                         className="rounded w-full object-cover max-h-32"
                         alt=""
                       />
@@ -290,7 +276,7 @@ export default function AdminDashboard() {
                       <div>
                         {item.konten && (
                           <img
-                            src={`http://localhost:8000/storage/${item.konten}?t=${Date.now()}`}
+                            src={`${process.env.NEXT_PUBLIC_LARAVEL_URL}/${item.konten}?t=${Date.now()}`}
                             alt=""
                             className="mb-2 rounded max-h-40"
                           />
