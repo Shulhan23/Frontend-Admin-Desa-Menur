@@ -119,7 +119,7 @@ export default function AdminDashboard() {
       let data
       try {
         data = await response.json()
-      } catch (_) {
+      } catch {
         const text = await response.text()
         console.error('Respon bukan JSON:', text)
         alert('Respon dari server tidak sesuai format JSON.')
