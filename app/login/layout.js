@@ -7,10 +7,8 @@ export const metadata = {
 
 export default function LoginLayout({ children }) {
   return (
-    <html lang="id">
-      <body className="bg-gray-100">
-        {children}
-      </body>
-    </html>
+    <div className="min-h-screen bg-gray-100">
+      {children}
+    </div>
   )
 }

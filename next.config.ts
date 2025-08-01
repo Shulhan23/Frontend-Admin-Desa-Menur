@@ -4,7 +4,11 @@ const nextConfig = {
     return [
       {
         source: '/laravel-api/:path*',
-        destination: 'https://api.desamenur.com/:path*', // HTTPS ✅
+        destination: 'http://localhost:8000/:path*',
+      },
+      {
+        source: '/storage/:path*',
+        destination: 'http://localhost:8000/storage/:path*',
       },
     ]
   },

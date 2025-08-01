@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/react": "^2.26.1",
+    "@tiptap/starter-kit": "^2.26.1",
+    "dompurify": "^3.2.6",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.525.0",
     "next": "15.3.5",
