@@ -14,11 +14,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/laravel-api/:path*",
-        destination: `${API_URL}/api/v1/:path*`, // ← Tambahkan /api/v1 DI SINI, bukan di env
+        destination: `${API_URL}/:path*`,
       },
       {
         source: "/storage/:path*",
-        destination: `${API_URL}/storage/:path*`, // ← Ini akses langsung file public
+        destination: `${API_URL}/storage/:path*`,
       },
     ];
   },
