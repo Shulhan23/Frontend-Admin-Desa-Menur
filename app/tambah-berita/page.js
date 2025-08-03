@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import DOMPurify from 'dompurify'
 import dynamic from 'next/dynamic'
-import { Loader2, ImagePlus, Plus, Trash } from 'lucide-react'
+import { Loader2, Plus, Trash } from 'lucide-react'
 
 const TiptapEditor = dynamic(() => import('../../src/components/TipTapEditor'), { ssr: false })
 
