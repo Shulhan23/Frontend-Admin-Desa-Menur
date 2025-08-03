@@ -204,7 +204,7 @@ export default function AdminDashboard() {
                       ) : (
                       <img
                         key={i}
-                        src={`${process.env.NEXT_PUBLIC_LARAVEL_URL}/${k.konten}?t=${Date.now()}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${item.konten}?t=${Date.now()}`}
                         className="rounded w-full object-cover max-h-32"
                         alt=""
                       />
@@ -275,7 +275,7 @@ export default function AdminDashboard() {
                       <div>
                         {item.konten && (
                           <img
-                            src={`${process.env.NEXT_PUBLIC_LARAVEL_URL}/${item.konten}?t=${Date.now()}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/storage/${item.konten}?t=${Date.now()}`}
                             alt=""
                             className="mb-2 rounded max-h-40"
                           />
