@@ -9,6 +9,7 @@ export default function Sidebar({ open, toggleSidebar }) {
   const menu = [
     { label: 'Dashboard', href: '/' },
     { label: 'Tambah Berita', href: '/tambah-berita' },
+    { label: 'UMKM', href: '/umkm' }
   ]
 
   return (

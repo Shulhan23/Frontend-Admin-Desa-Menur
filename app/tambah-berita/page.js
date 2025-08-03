@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import DOMPurify from 'dompurify'
 import dynamic from 'next/dynamic'
+import { Loader2, ImagePlus, Plus, Trash } from 'lucide-react'
 
 const TiptapEditor = dynamic(() => import('../../src/components/TipTapEditor'), { ssr: false })
 
@@ -119,17 +120,17 @@ export default function TambahBeritaPage() {
     }
   }
 
-  if (checkingAuth) return <p className="p-6">Memuat...</p>
+  if (checkingAuth) return <p className="p-6 text-gray-600">Memuat...</p>
 
   return (
-    <div className="p-6 max-w-xl">
-      <h1 className="text-2xl font-bold mb-6 text-green-800">Tambah Berita Baru</h1>
-      <form onSubmit={handleSubmit} className="space-y-5">
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-xl">
+      <h1 className="text-3xl font-bold mb-6 text-green-700">📰 Tambah Berita</h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-1">Judul</label>
+          <label className="block mb-2 font-medium">Judul</label>
           <input
             type="text"
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500"
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
             required
@@ -137,16 +138,16 @@ export default function TambahBeritaPage() {
         </div>
 
         {konten.map((item, index) => (
-          <div key={index} className="border p-3 rounded space-y-2 bg-white">
+          <div key={index} className="border p-4 rounded-lg space-y-3 bg-gray-50">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-semibold">Konten #{index + 1}</label>
+              <label className="font-semibold text-sm">Konten #{index + 1}</label>
               <button
                 type="button"
-                className="text-red-600 text-sm"
+                className="text-red-600 flex items-center text-sm"
                 onClick={() => handleRemoveKonten(index)}
                 disabled={konten.length === 1}
               >
-                Hapus
+                <Trash className="w-4 h-4 mr-1" /> Hapus
               </button>
             </div>
             <select
@@ -167,7 +168,7 @@ export default function TambahBeritaPage() {
                 <input
                   type="file"
                   accept="image/*"
-                  className="w-full"
+                  className="w-full border p-2 rounded"
                   onChange={(e) => handleKontenChange(index, 'konten', e.target.files[0])}
                 />
                 {item.konten instanceof File && (
@@ -185,17 +186,17 @@ export default function TambahBeritaPage() {
         <button
           type="button"
           onClick={handleAddKonten}
-          className="text-sm text-blue-600"
+          className="text-sm text-blue-600 flex items-center"
         >
-          + Tambah Konten
+          <Plus className="w-4 h-4 mr-1" /> Tambah Konten
         </button>
 
         <button
           type="submit"
           disabled={loading}
-          className="bg-green-700 text-white px-5 py-2 rounded hover:bg-green-800 disabled:opacity-50"
+          className="bg-green-700 text-white px-6 py-2 rounded-lg hover:bg-green-800 disabled:opacity-50 flex items-center"
         >
-          {loading ? 'Menyimpan...' : 'Simpan Berita'}
+          {loading && <Loader2 className="animate-spin w-4 h-4 mr-2" />} Simpan Berita
         </button>
       </form>
     </div>
