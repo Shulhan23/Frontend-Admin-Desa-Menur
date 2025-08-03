@@ -1,13 +1,12 @@
-// next.config.ts
 import type { NextConfig } from "next";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// Ambil langsung dari environment Vercel (dotenv.config() tidak perlu)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 if (!API_URL) {
-  throw new Error("NEXT_PUBLIC_API_URL is not defined in .env");
+  console.warn(
+    "⚠️ Warning: NEXT_PUBLIC_API_URL is not defined. Rewrite may fail."
+  );
 }
 
 const nextConfig: NextConfig = {
